@@ -39,10 +39,10 @@ void removeMultipleOf5() {
  if (Status.MPI_TAG == END_MSG) break;
  if (number % 5 > 0)
    MPI_Send(&number,1,MPI_INT,1,PIPE_MSG,MPI_COMM_WORLD);
-  //enviar para o proximo estagio
+  //send to the next stage
  }
   MPI_Send(&number,1,MPI_INT,1,PIPE_MSG,MPI_COMM_WORLD);
-  //enviar mensagem de finalização
+  //final message
 }
 
 void countOnlyPrimes() {
@@ -52,7 +52,7 @@ void countOnlyPrimes() {
  while (1) {
    MPI_Recv(&number,1,MPI_INT,0,MPI_ANY_TAG,MPI_COMM_WORLD,&Status);
    if ( Status.MPI_TAG == END_MSG ) break;
-   // sair se a mensagem for a final
+   // if the image is the final message
    isComposite = 0;
    for (i = 7; i*i <= number; i += 2)
      if (number % i == 0) {
