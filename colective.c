@@ -27,10 +27,9 @@ int main(int argc , char **argv){
  for(i=0; i < send_buffer_tamanho; i++)
    send_buffer[i] = rand()%MAX;
 
- //cria vetor  random
  MPI_Allgather(&send_buffer, send_buffer_tamanho, MPI_INT,
  recv_buffer, send_buffer_tamanho, MPI_INT, MPI_COMM_WORLD);
-// buffer = recv_buffer;
+
  MPI_Scatter(
    &send_buffer,
     send_buffer_tamanho,
@@ -41,7 +40,6 @@ int main(int argc , char **argv){
     0,
     MPI_COMM_WORLD);
 
-//MPI_Bcast(buffer,N,MPI_INT,0,MPI_COMM_WORLD);
   partial = 0;
   for(i=0; i < send_buffer_tamanho; i++){
    if(send_buffer[i] == number)
